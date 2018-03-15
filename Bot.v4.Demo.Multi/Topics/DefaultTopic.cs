@@ -25,7 +25,7 @@ namespace Bot.v4.Demo.Multi.Topics
                     {
                         // greet when added to conversation
                         var activity = context.Request.AsConversationUpdateActivity();
-                        if (activity.MembersAdded.Where(m => m.Id == activity.Recipient.Id).Any())
+                        if (IsNewMember(activity))
                         {
                             DefaultResponses.ReplyWithGreeting(context);
                             DefaultResponses.ReplyWithHelp(context);
@@ -90,6 +90,22 @@ namespace Bot.v4.Demo.Multi.Topics
             // just prompt the user to ask what they want to do
             DefaultResponses.ReplyWithResumeTopic(context);
             return Task.FromResult(true);
+        }
+
+        // From Bradley Lawrence
+        private bool IsNewMember(IConversationUpdateActivity activity)
+        {
+            if (activity.MembersAdded != null && activity.MembersAdded.Any())
+            {
+                foreach (var member in activity.MembersAdded ?? Array.Empty<ChannelAccount>())
+                {
+                    if (member.Id == activity.Recipient.Id)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
     }

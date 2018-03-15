@@ -59,6 +59,10 @@ namespace Bot.v4.Demo.Multi.Topics
                     //    await new ShowAlarmsTopic().StartTopic(context);
                     //    return await this.PromptForMissingData(context);
 
+                    case "showCarousel":
+                        DemoCardsResponses.ReplyWithCarousel(context);
+                        return Task.FromResult(true);
+
                     case "showAttachment":
                         DemoCardsResponses.ReplyWithAttachment(context);
                         return Task.FromResult(true);
@@ -75,7 +79,7 @@ namespace Bot.v4.Demo.Multi.Topics
 
                     default:
                         // show our confusion
-                        DemoCardsResponses.ReplyWithConfused(context);
+                        //DemoCardsResponses.ReplyWithConfused(context);
                         return Task.FromResult(true);
                 }
             }

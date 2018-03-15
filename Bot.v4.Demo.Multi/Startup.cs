@@ -41,10 +41,9 @@ namespace Bot.v4.Demo.Multi
                 middleware.Add(new RegExpRecognizerMiddleware()
                                 .AddIntent("help", new Regex("help(.*)", RegexOptions.IgnoreCase))
                                 .AddIntent("cancel", new Regex("cancel(.*)", RegexOptions.IgnoreCase))
+                                .AddIntent("showCarousel", new Regex("carousel(?:s)*(.*)", RegexOptions.IgnoreCase))
                                 .AddIntent("showAttachment", new Regex("attachment(?:s)*(.*)", RegexOptions.IgnoreCase))
                                 .AddIntent("demoCards", new Regex("demo card(?:s)*(.*)", RegexOptions.IgnoreCase)));
-
-
 
             });
         }

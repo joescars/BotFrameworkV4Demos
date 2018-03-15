@@ -34,7 +34,6 @@ namespace Bot.v4.Demo.Multi.Responses
 
         public static void ReplyWithAttachment(IBotContext context)
         {
-
             // Create the activity and add an attachment.
             var activity = MessageFactory.Attachment(
                 new Attachment()
@@ -44,9 +43,43 @@ namespace Bot.v4.Demo.Multi.Responses
                 });
 
             // Send the activity as a reply to the user.
-            //context.SendActivity((Activity)activity);
+            context.Batch().Reply(activity);
+        }
+
+        public static void ReplyWithCarousel(IBotContext context)
+        {
+            // Create the activity and attach a set of Hero cards.
+            var activity = MessageFactory.Carousel(
+                new Attachment[]
+                {
+             new HeroCard(
+                 title: "title1",
+                 images: new CardImage[] { new CardImage(url: catUrl) },
+                 buttons: new CardAction[]
+                 {
+                     new CardAction(title: "button1", type: ActionTypes.ImBack, value: "item1")
+                 })
+             .ToAttachment(),
+             new HeroCard(
+                 title: "title2",
+                 images: new CardImage[] { new CardImage(url: catUrl) },
+                 buttons: new CardAction[]
+                 {
+                     new CardAction(title: "button2", type: ActionTypes.ImBack, value: "item2")
+                 })
+             .ToAttachment(),
+             new HeroCard(
+                 title: "title3",
+                 images: new CardImage[] { new CardImage(url: catUrl) },
+                 buttons: new CardAction[]
+                 {
+                     new CardAction(title: "button3", type: ActionTypes.ImBack, value: "item3")
+                 })
+             .ToAttachment()
+                });
 
             context.Batch().Reply(activity);
         }
+
     }
 }
