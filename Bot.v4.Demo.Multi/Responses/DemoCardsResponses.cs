@@ -46,6 +46,23 @@ namespace Bot.v4.Demo.Multi.Responses
             context.Batch().Reply(activity);
         }
 
+        public static void ReplyWithHero(IBotContext context)
+        {
+            // Create the activity and attach a Hero card.
+            var activity = MessageFactory.Attachment(
+                new HeroCard(
+                    title: "Fun Cat Meme",
+                    images: new CardImage[] { new CardImage(url: catUrl) },
+                    buttons: new CardAction[]
+                    {
+                 new CardAction(title: "meow", type: ActionTypes.ImBack, value: "meow")
+                    })
+                .ToAttachment());
+
+            // Send the activity as a reply to the user.
+            context.Batch().Reply(activity);
+        }
+
         public static void ReplyWithCarousel(IBotContext context)
         {
             // Create the activity and attach a set of Hero cards.

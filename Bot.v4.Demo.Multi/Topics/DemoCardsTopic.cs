@@ -23,18 +23,6 @@ namespace Bot.v4.Demo.Multi.Topics
         {
             switch (context.Request.Type)
             {
-                case ActivityTypes.ConversationUpdate:
-                    {
-                        // greet when added to conversation
-                        var activity = context.Request.AsConversationUpdateActivity();
-                        if (activity.MembersAdded.Where(m => m.Id == activity.Recipient.Id).Any())
-                        {
-                            DemoCardsResponses.ReplyWithGreeting(context);
-                            this.Greeted = true;
-                        }
-                    }
-                    break;
-
                 case ActivityTypes.Message:
                     // greet on first message if we haven't already 
                     if (!Greeted)
@@ -54,10 +42,6 @@ namespace Bot.v4.Demo.Multi.Topics
             {
                 switch (context.RecognizedIntents.TopIntent?.Name)
                 {
-                    //case "showAlarms":
-                    //    // allow show alarm to interrupt, but it's one turn, so we show the data without changing the topic
-                    //    await new ShowAlarmsTopic().StartTopic(context);
-                    //    return await this.PromptForMissingData(context);
 
                     case "showCarousel":
                         DemoCardsResponses.ReplyWithCarousel(context);
@@ -65,6 +49,10 @@ namespace Bot.v4.Demo.Multi.Topics
 
                     case "showAttachment":
                         DemoCardsResponses.ReplyWithAttachment(context);
+                        return Task.FromResult(true);
+
+                    case "showHero":
+                        DemoCardsResponses.ReplyWithHero(context);
                         return Task.FromResult(true);
 
                     case "help":
