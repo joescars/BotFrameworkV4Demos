@@ -1,21 +1,18 @@
-﻿using Bot.v4.Demo.Multi.Models;
-using Bot.v4.Demo.Multi.Responses;
-using Microsoft.Bot.Schema;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bot.v4.Demo.Multi.Models;
+using Bot.v4.Demo.Multi.Responses;
+using Microsoft.Bot.Schema;
 
 namespace Bot.v4.Demo.Multi.Topics
 {
-    public class DemoCardsTopic : ITopic
+    public class DemoLUISTopic : ITopic
     {
-        public DemoCardsTopic()
-        {
+        public DemoLUISTopic() { }
 
-        }
-
-        public string Name { get; set; } = "DemoCards";
+        public string Name { get; set; } = "LUIS Topic";
 
         public bool Greeted { get; set; } = false;
 
@@ -27,7 +24,7 @@ namespace Bot.v4.Demo.Multi.Topics
                     // greet on first message if we haven't already 
                     if (!Greeted)
                     {
-                        DemoCardsResponses.ReplyWithGreeting(context);
+                        DemoLUISResonses.ReplyWithGreeting(context);                        
                         this.Greeted = true;
                     }
                     return this.ContinueTopic(context);
@@ -37,44 +34,25 @@ namespace Bot.v4.Demo.Multi.Topics
 
         public Task<bool> ContinueTopic(MultiBotContext context)
         {
-            // for messages
             if (context.Request.Type == ActivityTypes.Message)
             {
                 switch (context.RecognizedIntents.TopIntent?.Name)
                 {
-
-                    case "showCarousel":
-                        DemoCardsResponses.ReplyWithCarousel(context);
-                        return Task.FromResult(true);
-
-                    case "showAttachment":
-                        DemoCardsResponses.ReplyWithAttachment(context);
-                        return Task.FromResult(true);
-
-                    case "showHero":
-                        DemoCardsResponses.ReplyWithHero(context);
-                        return Task.FromResult(true);
-
                     case "help":
-                        // show contextual help 
-                        DemoCardsResponses.ReplyWithHelp(context);
+                        DemoLUISResonses.ReplyWithHelp(context);
                         return Task.FromResult(true);
-
                     case "mainMenu":
                         // prompt to go to main menu
                         // switch to the default topic
                         context.ConversationState.ActiveTopic = new DefaultTopic();
                         return context.ConversationState.ActiveTopic.StartTopic(context);
-
                     default:
-                        // show our confusion
-                        //DemoCardsResponses.ReplyWithConfused(context);
+                        // send to luis
+                        DemoLUISResonses.ReplyWithLUISResult(context);
                         return Task.FromResult(true);
-                }
+                }               
             }
-
             return Task.FromResult(true);
-
         }
 
         public Task<bool> ResumeTopic(MultiBotContext context)

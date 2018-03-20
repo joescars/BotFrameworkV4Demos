@@ -19,7 +19,11 @@ namespace Bot.v4.Demo.Multi.Responses
 
         public static void ReplyWithHelp(IBotContext context)
         {
-            context.Batch().Reply($"I can demonstrate cards ");
+            context.Batch().Reply($"I can demonstrate different card types.");
+
+            context.Batch().Reply($"Try *hero card*, *attachment*, or *carousel* ");
+
+            context.Batch().Reply($"Or to go back enter *main menu*");
         }
 
         public static void ReplyWithResumeTopic(IBotContext context)

@@ -25,6 +25,12 @@ namespace Bot.v4.Demo.Multi
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
             Configuration = builder.Build();
         }
 
@@ -38,7 +44,10 @@ namespace Bot.v4.Demo.Multi
                 var middleware = options.Middleware;
                 middleware.Add(new BatchOutputMiddleware());
                 middleware.Add(new ConversationState<ConversationData>(new MemoryStorage()));
+
+                // Regex Intents
                 middleware.Add(new RegExpRecognizerMiddleware()
+                                .AddIntent("luisDemo", new Regex("demo luis(.*)", RegexOptions.IgnoreCase))
                                 .AddIntent("mainMenu", new Regex("main menu(.*)", RegexOptions.IgnoreCase))
                                 .AddIntent("help", new Regex("help(.*)", RegexOptions.IgnoreCase))
                                 .AddIntent("cancel", new Regex("cancel(.*)", RegexOptions.IgnoreCase))
@@ -46,6 +55,14 @@ namespace Bot.v4.Demo.Multi
                                 .AddIntent("showCarousel", new Regex("carousel(?:s)*(.*)", RegexOptions.IgnoreCase))
                                 .AddIntent("showAttachment", new Regex("attachment(?:s)*(.*)", RegexOptions.IgnoreCase))
                                 .AddIntent("demoCards", new Regex("demo card(?:s)*(.*)", RegexOptions.IgnoreCase)));
+
+                // Setup LUIS Middleware
+                var luisRecognizerOptions = new LuisRecognizerOptions { Verbose = false };
+                var luisModel = new LuisModel(
+                    Configuration["LUIS:AppId"],
+                    Configuration["LUIS:SubscriptionKey"],
+                    new Uri("https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/"));
+                middleware.Add(new LuisRecognizerMiddleware(luisModel, luisRecognizerOptions));
 
             });
         }

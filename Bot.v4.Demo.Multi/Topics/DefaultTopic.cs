@@ -62,9 +62,9 @@ namespace Bot.v4.Demo.Multi.Topics
                             context.ConversationState.ActiveTopic = new DemoCardsTopic();
                             return context.ConversationState.ActiveTopic.StartTopic(context);
 
-                        case "luisDemos":
+                        case "luisDemo":
                             // switch to LUIS Demos
-                            context.ConversationState.ActiveTopic = new DemoCardsTopic();
+                            context.ConversationState.ActiveTopic = new DemoLUISTopic();
                             return context.ConversationState.ActiveTopic.StartTopic(context);
 
                         case "help":
