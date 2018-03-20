@@ -60,10 +60,11 @@ namespace Bot.v4.Demo.Multi.Topics
                         DemoCardsResponses.ReplyWithHelp(context);
                         return Task.FromResult(true);
 
-                    case "cancel":
-                        // prompt to cancel
-                        DemoCardsResponses.ReplyWithConfused(context);
-                        return Task.FromResult(true);
+                    case "mainMenu":
+                        // prompt to go to main menu
+                        // switch to the default topic
+                        context.ConversationState.ActiveTopic = new DefaultTopic();
+                        return context.ConversationState.ActiveTopic.StartTopic(context);
 
                     default:
                         // show our confusion

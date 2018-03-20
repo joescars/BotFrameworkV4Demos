@@ -24,13 +24,17 @@ namespace Bot.v4.Demo.Multi.Topics
                 case ActivityTypes.ConversationUpdate:
                     {
                         // greet when added to conversation
-                        var activity = context.Request.AsConversationUpdateActivity();
-                        if (IsNewMember(activity))
+                        foreach (var newMember in context.Request.MembersAdded)
                         {
-                            DefaultResponses.ReplyWithGreeting(context);
-                            DefaultResponses.ReplyWithHelp(context);
-                            this.Greeted = true;
+                            if (newMember.Id != context.Request.Recipient.Id)
+                            {
+                                DefaultResponses.ReplyWithGreeting(context);
+                                DefaultResponses.ReplyWithHelp(context);
+                                DefaultResponses.ReplyWithResumeTopic(context);
+                                this.Greeted = true;
+                            }
                         }
+
                     }
                     break;
 
@@ -53,20 +57,15 @@ namespace Bot.v4.Demo.Multi.Topics
                 case ActivityTypes.Message:
                     switch (context.RecognizedIntents.TopIntent?.Name)
                     {
-                        //case "addAlarm":
-                        //    // switch to addAlarm topic
-                        //    context.ConversationState.ActiveTopic = new AddAlarmTopic();
-                        //    return context.ConversationState.ActiveTopic.StartTopic(context);
-
                         case "demoCards":
-                            // switch to show alarms topic
+                            // switch to card demos
                             context.ConversationState.ActiveTopic = new DemoCardsTopic();
                             return context.ConversationState.ActiveTopic.StartTopic(context);
 
-                        //case "deleteAlarm":
-                        //    // switch to delete alarm topic
-                        //    context.ConversationState.ActiveTopic = new DeleteAlarmTopic();
-                        //    return context.ConversationState.ActiveTopic.StartTopic(context);
+                        case "luisDemos":
+                            // switch to LUIS Demos
+                            context.ConversationState.ActiveTopic = new DemoCardsTopic();
+                            return context.ConversationState.ActiveTopic.StartTopic(context);
 
                         case "help":
                             // show help
@@ -90,23 +89,7 @@ namespace Bot.v4.Demo.Multi.Topics
             // just prompt the user to ask what they want to do
             DefaultResponses.ReplyWithResumeTopic(context);
             return Task.FromResult(true);
-        }
-
-        // From Bradley Lawrence
-        private bool IsNewMember(IConversationUpdateActivity activity)
-        {
-            if (activity.MembersAdded != null && activity.MembersAdded.Any())
-            {
-                foreach (var member in activity.MembersAdded ?? Array.Empty<ChannelAccount>())
-                {
-                    if (member.Id == activity.Recipient.Id)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
+        }        
 
     }
 }

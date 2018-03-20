@@ -39,6 +39,7 @@ namespace Bot.v4.Demo.Multi
                 middleware.Add(new BatchOutputMiddleware());
                 middleware.Add(new ConversationState<ConversationData>(new MemoryStorage()));
                 middleware.Add(new RegExpRecognizerMiddleware()
+                                .AddIntent("mainMenu", new Regex("main menu(.*)", RegexOptions.IgnoreCase))
                                 .AddIntent("help", new Regex("help(.*)", RegexOptions.IgnoreCase))
                                 .AddIntent("cancel", new Regex("cancel(.*)", RegexOptions.IgnoreCase))
                                 .AddIntent("showHero", new Regex("hero card(?:s)*(.*)", RegexOptions.IgnoreCase))
