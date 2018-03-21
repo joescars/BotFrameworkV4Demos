@@ -1,5 +1,5 @@
 # Bot Framework V4 Samples
 
-Demo project showing how to use the C# Bot Framework V4 SDK
+Demo project showing how to use the C# [Bot Builder SDK v4](https://github.com/Microsoft/botbuilder-dotnet)
 
-Work in progress...
+This is a work in progress...

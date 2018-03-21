@@ -12,7 +12,7 @@ namespace Bot.v4.Demo.Multi
     public class MultiBot : IBot
     {
         
-        public async Task OnReceiveActivity(IBotContext botContext)
+        public async Task OnReceiveActivity(ITurnContext botContext)
         {
             var context = new MultiBotContext(botContext);
 

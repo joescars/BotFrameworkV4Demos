@@ -12,12 +12,12 @@ namespace Bot.v4.Demo.Multi.Responses
     {
         private static string catUrl = "http://cdn3-www.cattime.com/assets/uploads/gallery/25-funny-cat-memes/01_FUNNY-CAT-MEME.jpg";
 
-        public static void ReplyWithGreeting(IBotContext context)
+        public static void ReplyWithGreeting(ITurnContext context)
         {
             context.Batch().Reply($"Hello, Let's discover what you can do with cards.");
         }
 
-        public static void ReplyWithHelp(IBotContext context)
+        public static void ReplyWithHelp(ITurnContext context)
         {
             context.Batch().Reply($"I can demonstrate different card types.");
 
@@ -26,17 +26,17 @@ namespace Bot.v4.Demo.Multi.Responses
             context.Batch().Reply($"Or to go back enter *main menu*");
         }
 
-        public static void ReplyWithResumeTopic(IBotContext context)
+        public static void ReplyWithResumeTopic(ITurnContext context)
         {
             context.Batch().Reply($"What can I do for you?");
         }
 
-        public static void ReplyWithConfused(IBotContext context)
+        public static void ReplyWithConfused(ITurnContext context)
         {
             context.Batch().Reply($"I am sorry, I didn't understand that.");
         }
 
-        public static void ReplyWithAttachment(IBotContext context)
+        public static void ReplyWithAttachment(ITurnContext context)
         {
             // Create the activity and add an attachment.
             var activity = MessageFactory.Attachment(
@@ -50,7 +50,7 @@ namespace Bot.v4.Demo.Multi.Responses
             context.Batch().Reply(activity);
         }
 
-        public static void ReplyWithHero(IBotContext context)
+        public static void ReplyWithHero(ITurnContext context)
         {
             // Create the activity and attach a Hero card.
             var activity = MessageFactory.Attachment(
@@ -67,7 +67,7 @@ namespace Bot.v4.Demo.Multi.Responses
             context.Batch().Reply(activity);
         }
 
-        public static void ReplyWithCarousel(IBotContext context)
+        public static void ReplyWithCarousel(ITurnContext context)
         {
             // Create the activity and attach a set of Hero cards.
             var activity = MessageFactory.Carousel(

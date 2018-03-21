@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Bot.v4.Demo.Multi.Models
 {
-    public class MultiBotContext : BotContextWrapper
+    public class MultiBotContext : TurnContextWrapper
     {
-        public MultiBotContext(IBotContext context) : base(context)
+        public MultiBotContext(ITurnContext context) : base(context)
         {
         }
 

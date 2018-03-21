@@ -10,27 +10,27 @@ namespace Bot.v4.Demo.Multi.Responses
 {
     public static class DemoLUISResonses
     {
-        public static void ReplyWithGreeting(IBotContext context)
+        public static void ReplyWithGreeting(ITurnContext context)
         {
             context.Batch().Reply($"Hello, Let's Discover what you can do with LUIS!");
         }
 
-        public static void ReplyWithHelp(IBotContext context)
+        public static void ReplyWithHelp(ITurnContext context)
         {
             context.Batch().Reply($"Any text you enter will be sent to LUIS and we will return matching intents and entities.");
         }
 
-        public static void ReplyWithResumeTopic(IBotContext context)
+        public static void ReplyWithResumeTopic(ITurnContext context)
         {
             context.Batch().Reply($"What can I do for you?");
         }
 
-        public static void ReplyWithConfused(IBotContext context)
+        public static void ReplyWithConfused(ITurnContext context)
         {
             context.Batch().Reply($"I am sorry, I didn't understand that.");
         }
 
-        public static void ReplyWithLUISResult(IBotContext context)
+        public static void ReplyWithLUISResult(ITurnContext context)
         {
             context.Batch().Reply("Sending to Luis...");
 
