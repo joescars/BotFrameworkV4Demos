@@ -14,26 +14,26 @@ namespace Bot.v4.Demo.Multi.Responses
 
         public static void ReplyWithGreeting(ITurnContext context)
         {
-            context.Batch().Reply($"Hello, Let's discover what you can do with cards.");
+            context.SendActivity($"Hello, Let's discover what you can do with cards.");
         }
 
         public static void ReplyWithHelp(ITurnContext context)
         {
-            context.Batch().Reply($"I can demonstrate different card types.");
+            context.SendActivity($"I can demonstrate different card types.");
 
-            context.Batch().Reply($"Try *hero card*, *attachment*, or *carousel* ");
+            context.SendActivity($"Try *hero card*, *attachment*, or *carousel* ");
 
-            context.Batch().Reply($"Or to go back enter *main menu*");
+            context.SendActivity($"Or to go back enter *main menu*");
         }
 
         public static void ReplyWithResumeTopic(ITurnContext context)
         {
-            context.Batch().Reply($"What can I do for you?");
+            context.SendActivity($"What can I do for you?");
         }
 
         public static void ReplyWithConfused(ITurnContext context)
         {
-            context.Batch().Reply($"I am sorry, I didn't understand that.");
+            context.SendActivity($"I am sorry, I didn't understand that.");
         }
 
         public static void ReplyWithAttachment(ITurnContext context)
@@ -47,7 +47,7 @@ namespace Bot.v4.Demo.Multi.Responses
                 });
 
             // Send the activity as a reply to the user.
-            context.Batch().Reply(activity);
+            context.SendActivity(activity);
         }
 
         public static void ReplyWithHero(ITurnContext context)
@@ -64,7 +64,7 @@ namespace Bot.v4.Demo.Multi.Responses
                 .ToAttachment());
 
             // Send the activity as a reply to the user.
-            context.Batch().Reply(activity);
+            context.SendActivity(activity);
         }
 
         public static void ReplyWithCarousel(ITurnContext context)
@@ -99,7 +99,7 @@ namespace Bot.v4.Demo.Multi.Responses
              .ToAttachment()
                 });
 
-            context.Batch().Reply(activity);
+            context.SendActivity(activity);
         }
 
     }

@@ -11,22 +11,22 @@ namespace Bot.v4.Demo.Multi.Responses
     {
         public static void ReplyWithGreeting(ITurnContext context)
         {
-            context.Batch().Reply($"Hello, I'm the multi-bot.");
+            context.SendActivity($"Hello, I'm the multi-bot.");
         }
 
         public static void ReplyWithHelp(ITurnContext context)
         {
-            context.Batch().Reply($"I can demonstrate all different features of bot v4 ");
+            context.SendActivity($"I can demonstrate all different features of bot v4 ");
         }
 
         public static void ReplyWithResumeTopic(ITurnContext context)
         {
-            context.Batch().Reply($"What can I do for you?");
+            context.SendActivity($"What can I do for you?");
         }
 
         public static void ReplyWithConfused(ITurnContext context)
         {
-            context.Batch().Reply($"I am sorry, I didn't understand that.");
+            context.SendActivity($"I am sorry, I didn't understand that.");
         }
     }
 }

@@ -42,7 +42,6 @@ namespace Bot.v4.Demo.Multi
             {
                 options.CredentialProvider = new ConfigurationCredentialProvider(Configuration);
                 var middleware = options.Middleware;
-                middleware.Add(new BatchOutputMiddleware());
                 middleware.Add(new ConversationState<ConversationData>(new MemoryStorage()));
 
                 // Regex Intents

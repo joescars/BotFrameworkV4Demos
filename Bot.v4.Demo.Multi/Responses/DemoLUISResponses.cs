@@ -12,27 +12,27 @@ namespace Bot.v4.Demo.Multi.Responses
     {
         public static void ReplyWithGreeting(ITurnContext context)
         {
-            context.Batch().Reply($"Hello, Let's Discover what you can do with LUIS!");
+            context.SendActivity($"Hello, Let's Discover what you can do with LUIS!");
         }
 
         public static void ReplyWithHelp(ITurnContext context)
         {
-            context.Batch().Reply($"Any text you enter will be sent to LUIS and we will return matching intents and entities.");
+            context.SendActivity($"Any text you enter will be sent to LUIS and we will return matching intents and entities.");
         }
 
         public static void ReplyWithResumeTopic(ITurnContext context)
         {
-            context.Batch().Reply($"What can I do for you?");
+            context.SendActivity($"What can I do for you?");
         }
 
         public static void ReplyWithConfused(ITurnContext context)
         {
-            context.Batch().Reply($"I am sorry, I didn't understand that.");
+            context.SendActivity($"I am sorry, I didn't understand that.");
         }
 
         public static void ReplyWithLUISResult(ITurnContext context)
         {
-            context.Batch().Reply("Sending to Luis...");
+            context.SendActivity("Sending to Luis...");
 
             // Get list of itents
             var results = context.Get<RecognizerResult>("LuisRecognizerResult");
@@ -44,10 +44,10 @@ namespace Bot.v4.Demo.Multi.Responses
             {
                 case null:
                 case "None":
-                    context.Batch().Reply("Apologies, I dont understand");
+                    context.SendActivity("Apologies, I dont understand");
                     break;
                 default:
-                    context.Batch().Reply($"Itent: {topIntent.key}, Entities: {results.Entities.Count}");
+                    context.SendActivity($"Itent: {topIntent.key}, Entities: {results.Entities.Count}");
                     break;
             }
 
