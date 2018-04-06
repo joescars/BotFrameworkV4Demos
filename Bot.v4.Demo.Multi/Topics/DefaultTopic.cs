@@ -19,14 +19,14 @@ namespace Bot.v4.Demo.Multi.Topics
 
         public Task<bool> StartTopic(MultiBotContext context)
         {
-            switch (context.Request.Type)
+            switch (context.Activity.Type)
             {
                 case ActivityTypes.ConversationUpdate:
                     {
                         // greet when added to conversation
-                        foreach (var newMember in context.Request.MembersAdded)
+                        foreach (var newMember in context.Activity.MembersAdded)
                         {
-                            if (newMember.Id != context.Request.Recipient.Id)
+                            if (newMember.Id != context.Activity.Recipient.Id)
                             {
                                 DefaultResponses.ReplyWithGreeting(context);
                                 DefaultResponses.ReplyWithHelp(context);
@@ -52,7 +52,7 @@ namespace Bot.v4.Demo.Multi.Topics
 
         public Task<bool> ContinueTopic(MultiBotContext context)
         {
-            switch (context.Request.Type)
+            switch (context.Activity.Type)
             {
                 case ActivityTypes.Message:
                     switch (context.RecognizedIntents.TopIntent?.Name)

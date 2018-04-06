@@ -35,6 +35,6 @@ namespace Bot.v4.Demo.Multi.Models
             }
         }
 
-        public IRecognizedIntents RecognizedIntents { get { return this.Get<IRecognizedIntents>(); } }
+        public IRecognizedIntents RecognizedIntents { get { return this.Services.Get<IRecognizedIntents>(); } }
     }
 }

@@ -18,7 +18,7 @@ namespace Bot.v4.Demo.Multi.Topics
 
         public Task<bool> StartTopic(MultiBotContext context)
         {
-            switch (context.Request.Type)
+            switch (context.Activity.Type)
             {
                 case ActivityTypes.Message:
                     // greet on first message if we haven't already 
@@ -34,7 +34,7 @@ namespace Bot.v4.Demo.Multi.Topics
 
         public Task<bool> ContinueTopic(MultiBotContext context)
         {
-            if (context.Request.Type == ActivityTypes.Message)
+            if (context.Activity.Type == ActivityTypes.Message)
             {
                 switch (context.RecognizedIntents.TopIntent?.Name)
                 {

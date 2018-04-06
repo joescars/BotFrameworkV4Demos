@@ -35,7 +35,7 @@ namespace Bot.v4.Demo.Multi.Responses
             context.SendActivity("Sending to Luis...");
 
             // Get list of itents
-            var results = context.Get<RecognizerResult>("LuisRecognizerResult");
+            var results = context.Services.Get<RecognizerResult>(LuisRecognizerMiddleware.LuisRecognizerResultKey);
 
             // Get top Intent
             var topIntent = results.GetTopScoringIntent();
