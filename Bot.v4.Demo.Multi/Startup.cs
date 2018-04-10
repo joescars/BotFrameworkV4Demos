@@ -46,14 +46,9 @@ namespace Bot.v4.Demo.Multi
 
                 // Regex Intents
                 middleware.Add(new RegExpRecognizerMiddleware()
-                                .AddIntent("luisDemo", new Regex("demo luis(.*)", RegexOptions.IgnoreCase))
                                 .AddIntent("mainMenu", new Regex("main menu(.*)", RegexOptions.IgnoreCase))
                                 .AddIntent("help", new Regex("help(.*)", RegexOptions.IgnoreCase))
-                                .AddIntent("cancel", new Regex("cancel(.*)", RegexOptions.IgnoreCase))
-                                .AddIntent("showHero", new Regex("hero card(?:s)*(.*)", RegexOptions.IgnoreCase))
-                                .AddIntent("showCarousel", new Regex("carousel(?:s)*(.*)", RegexOptions.IgnoreCase))
-                                .AddIntent("showAttachment", new Regex("attachment(?:s)*(.*)", RegexOptions.IgnoreCase))
-                                .AddIntent("demoCards", new Regex("demo card(?:s)*(.*)", RegexOptions.IgnoreCase)));
+                                .AddIntent("cancel", new Regex("cancel(.*)", RegexOptions.IgnoreCase)));
 
                 // Setup LUIS Middleware
                 var luisRecognizerOptions = new LuisRecognizerOptions { Verbose = false };
